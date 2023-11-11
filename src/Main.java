@@ -1,17 +1,34 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+///ko
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        List<String> students = new ArrayList<>();
+        int ball = 0;
+        double srball = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader("F://java//Nightfile//text.txt"))) {
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                String name = parts[0] + " " + parts[1];
+                int score = Integer.parseInt(parts[2]);
+                if (score < 3) {
+                    students.add(name);
+                }
+                ball += score;
+            }
+        } catch (IOException e) {
+            System.out.println("fdgd");
         }
+        srball = (double) ball / students.size();
+
+        System.out.println("Ученики с оценкой меньше 3 баллов:");
+        for (String student : students) {
+            System.out.println(student);
+        }
+        System.out.println("Средний балл по классу: " + srball);
     }
 }
